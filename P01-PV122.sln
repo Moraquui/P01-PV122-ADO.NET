@@ -17,6 +17,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorAppWebAsseblyDemo.Cli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorAppWebAsseblyDemo.Shared", "ASP.NET Core\BlazorAppWebAsseblyDemo\Shared\BlazorAppWebAsseblyDemo.Shared.csproj", "{ECDA3D38-CE09-4E89-870C-9A8D3F6985CF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoClients", "DemoClients\DemoClients.csproj", "{28C7E81F-6AC0-4DE7-81A2-CB09A9C1D437}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrganizationManager", "OrganizationManager\OrganizationManager.csproj", "{3478CE84-85A7-4244-8808-AF830A0B789A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleWebClientDemo", "ConsoleWebClientDemo\ConsoleWebClientDemo.csproj", "{88BC18B2-BCF0-464C-A3B9-B32F66E6A150}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +57,18 @@ Global
 		{ECDA3D38-CE09-4E89-870C-9A8D3F6985CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECDA3D38-CE09-4E89-870C-9A8D3F6985CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECDA3D38-CE09-4E89-870C-9A8D3F6985CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28C7E81F-6AC0-4DE7-81A2-CB09A9C1D437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28C7E81F-6AC0-4DE7-81A2-CB09A9C1D437}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28C7E81F-6AC0-4DE7-81A2-CB09A9C1D437}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28C7E81F-6AC0-4DE7-81A2-CB09A9C1D437}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3478CE84-85A7-4244-8808-AF830A0B789A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3478CE84-85A7-4244-8808-AF830A0B789A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3478CE84-85A7-4244-8808-AF830A0B789A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3478CE84-85A7-4244-8808-AF830A0B789A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88BC18B2-BCF0-464C-A3B9-B32F66E6A150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88BC18B2-BCF0-464C-A3B9-B32F66E6A150}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88BC18B2-BCF0-464C-A3B9-B32F66E6A150}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88BC18B2-BCF0-464C-A3B9-B32F66E6A150}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

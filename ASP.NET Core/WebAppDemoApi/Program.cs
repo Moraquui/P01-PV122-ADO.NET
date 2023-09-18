@@ -1,6 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using WebAppDemoApi.Data;
 using WebAppDemoApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite(connectionString));
+
 
 // Add services to the container.
 
@@ -9,9 +16,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<FileStoreService>(); // 1 обєкт на програму
-//builder.Services.AddScoped();    // 1 обєкт на сесію HHTP
-//builder.Services.AddTransient()  // 1 обєкт на звернення
+builder.Services.AddSingleton<FileStoreService>();
+
+//builder.Services.AddScoped();    
+//builder.Services.AddTransient()  
 
 var app = builder.Build();
 

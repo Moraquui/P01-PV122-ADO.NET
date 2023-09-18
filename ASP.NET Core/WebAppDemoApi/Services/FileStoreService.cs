@@ -2,23 +2,40 @@
 {
     public class FileStoreService
     {
-        const string baseDirectory = "c:/demo/";
+        public string ReadFile(string fileName)
+        {
+            try
+            {
+                return File.ReadAllText(Path.GetFullPath(fileName));
+                //return File.ReadAllText($"{baseDirectory}{fileName}");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
-        //public FileStoreService(IConfiguration configuration)
-        //{
-                
-        //}
-        public string ReadFile(string filename) 
+        public async Task<string> ReadFileAsync(string fileName)
         {
-            return File.ReadAllText($"{baseDirectory}{filename}");
+            try
+            {
+                return await File.ReadAllTextAsync(Path.GetFullPath(fileName));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-        public async Task<string> ReadFileAsync(string filename) 
+        public void SaveFile(string fileName, string text)
         {
-            return await File.ReadAllTextAsync($"{baseDirectory}{filename}");
-        }
-        public void SaveFile(string filename,string text) 
-        {
-           File.WriteAllText($"{baseDirectory}{filename}",text);
+            try
+            {
+                File.WriteAllText(Path.GetFullPath(fileName), text);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while saving the file: {ex.Message}");
+            }
         }
     }
 }
