@@ -38,7 +38,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}"); //if nothing inside input u ll go to this adress. //Home/Index.html 
 app.MapRazorPages();
 
 app.Run();
