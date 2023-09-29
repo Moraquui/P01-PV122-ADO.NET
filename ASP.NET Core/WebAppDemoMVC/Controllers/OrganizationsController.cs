@@ -7,9 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DemoClients;
 using WebAppDemoMVC.Data;
+using WebAppDemoMVC.Models;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Text.RegularExpressions;
 
 namespace WebAppDemoMVC.Controllers
 {
+
     public class OrganizationsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -18,13 +22,23 @@ namespace WebAppDemoMVC.Controllers
         {
             _context = context;
         }
-
         // GET: Organizations
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string fieldName, string? filter, SearchType ASD = SearchType.StartsWith)
         {
-            return _context.Organisations != null ?
-                        View(await _context.Organisations.ToListAsync()) :
-                        Problem("Entity set 'ApplicationDbContext.Organisations'  is null.");
+            ViewData["ActivePage"] = "Organization";
+            if(_context.Organisations != null)
+            {
+                var myModel = new OrganizationSearchedView<Organization>() { SearchType = ASD, Filter = filter ?? string.Empty, FieldName = fieldName };
+                var query = _context.Organisations.AsQueryable();
+
+                myModel.Values = await myModel.GetSortedQueue(query).ToListAsync();
+                return View(myModel);
+                
+            }
+            else
+            {
+                return Problem("Entity set 'ApplicationDbContext.Organisations'  is null.");
+            }
         }
 
         // GET: Organizations/Details/5
@@ -35,14 +49,17 @@ namespace WebAppDemoMVC.Controllers
                 return NotFound();
             }
 
-            var organization = await _context.Organisations
+            var organization = await _context.Organisations.Include(o => o.OrganizationUsers)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (organization == null)
             {
                 return NotFound();
             }
+            var organizationUsers = await _context.OrganisationUsers.Where(o => o.Organization.Id == organization.Id).ToListAsync();
 
-            return View(organization);
+            var CombinedModel = new CompanyUsersCombModel(organization, organizationUsers);
+
+            return View(CombinedModel);
         }
 
         // GET: Organizations/Create
