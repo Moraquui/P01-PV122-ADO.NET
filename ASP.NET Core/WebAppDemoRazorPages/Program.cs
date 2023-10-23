@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
 using WebAppDemoRazorPages.Data;
-
+using UAParser;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -37,5 +38,23 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.Use(async (context, next) =>
+{
+    await next.Invoke();
+    
+    string requestDate = DateTime.Now.ToString();
+    string requestPath = context.Request.Path;
+    string ipAddress = context.Connection.RemoteIpAddress.ToString();
+    string userAgent = context.Request.Headers["User-Agent"];
+    var uaParser = Parser.GetDefault();
+    ClientInfo c = uaParser.Parse(userAgent);
+    string browser = c.UA.Major.ToString();
+    string os = c.OS.Family.ToString();
+    string logMessage = $"Date:{requestDate} -Path: {requestPath} -Ip: {ipAddress} - Browser: {browser}, OS: {os}\n";
+    // Укажите путь к вашему файлу журнала
+    string logFilePath = "log.txt";
 
+    // Добавьте информацию в файл
+    File.AppendAllText(logFilePath, logMessage);
+});
 app.Run();

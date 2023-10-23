@@ -36,7 +36,7 @@ namespace WebAppDemoRazorPages.Pages.OrganizationUsers
                 return NotFound();
             }
             OrganizationUser = organizationuser;
-           ViewData["OrganizationId"] = new SelectList(_context.Organisations, "Id", "FullName");
+            ViewData["OrganizationId"] = new SelectList(_context.Organisations, "Id", "FullName");
             return Page();
         }
 

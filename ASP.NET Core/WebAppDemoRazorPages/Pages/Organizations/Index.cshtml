@@ -10,6 +10,21 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<form asp-page-handler="filter">
+    <p>
+        Title: <input type="text" name="filter" value="@Model.Filter" />
+        <input type="text" name="fieldName" value="@Model.fieldName" />
+        SearchField:
+
+        <input type="submit" value="Filter" />
+    </p>
+    <p>
+        <div class="form-group">
+            <label>Filter Type</label>
+            <select asp-for="searchType" name="ASD" asp-items="Html.GetEnumSelectList<SearchType>()"></select>
+        </div>
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -23,7 +38,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Organization) {
+@foreach (var item in  Model.Organization) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -32,11 +47,31 @@
                 @Html.DisplayFor(modelItem => item.FullName)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-page="./Edit" class="btn btn-secondary" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" class="btn btn-secondary" asp-route-id="@item.Id">Details</a> |
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal@(item.Id)">
+                    Delete
+                </button>
+                <div class="modal fade" id="exampleModal@(item.Id)" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Organization of removal</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                    The organization will be deleted @Html.DisplayFor(modelItem => item.Name)
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <a asp-page="./Delete" class="btn btn-danger" asp-route-id="@item.Id">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </td>
         </tr>
 }
     </tbody>
 </table>
+@await Html.PartialAsync("_PaginatorPartial", Model)

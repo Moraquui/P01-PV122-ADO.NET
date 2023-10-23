@@ -28,26 +28,6 @@ namespace WebAppDemoRazorPages.Pages.Organizations
             {
                 return NotFound();
             }
-
-            var organization = await _context.Organisations.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (organization == null)
-            {
-                return NotFound();
-            }
-            else 
-            {
-                Organization = organization;
-            }
-            return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync(int? id)
-        {
-            if (id == null || _context.Organisations == null)
-            {
-                return NotFound();
-            }
             var organization = await _context.Organisations.FindAsync(id);
 
             if (organization != null)

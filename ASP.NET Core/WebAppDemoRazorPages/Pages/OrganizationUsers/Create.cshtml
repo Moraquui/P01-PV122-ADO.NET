@@ -1,6 +1,6 @@
 ﻿@page
 @model WebAppDemoRazorPages.Pages.OrganizationUsers.CreateModel
-
+@using DemoClients;
 @{
     ViewData["Title"] = "Create";
 }
@@ -18,14 +18,14 @@
                 <input asp-for="OrganizationUser.Name" class="form-control" />
                 <span asp-validation-for="OrganizationUser.Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
+@*             <div class="form-group">
                 <label asp-for="OrganizationUser.OrganizationId" class="control-label"></label>
                 <select asp-for="OrganizationUser.OrganizationId" class ="form-control" asp-items="ViewBag.OrganizationId"></select>
-            </div>
+            </div> *@
             <div class="form-group">
                 <label asp-for="OrganizationUser.AccessLevel" class="control-label"></label>
-                <select asp-for="OrganizationUser.AccessLevel" class="form-control"></select>
-                <span asp-validation-for="OrganizationUser.AccessLevel" class="text-danger"></span>
+                <select asp-for="OrganizationUser.AccessLevel" class="form-control" asp-items="Html.GetEnumSelectList<UserAccess>()"></select>
+                <span asp-validation-for="OrganizationUser.AccessLevel"  class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -39,8 +39,6 @@ namespace WebAppDemoMVC.Models
         {
             if (!string.IsNullOrEmpty(Filter))
             {
-                //delete switch from ent
-
                 switch (SearchType)
                 {
                     case SearchType.StartsWith:
@@ -56,27 +54,6 @@ namespace WebAppDemoMVC.Models
                         query = query.Where(obj => EF.Property<string>(obj, FieldName).StartsWith(Filter));
                         break;
                 }
-                /*
-                filteredQuery = filteredQuery.Where(obj =>
-                {
-                    var propertyValue = propertyValue_?.GetValue(obj);
-                    if(propertyValue != null && Filter != null)
-                    {
-                switch (SearchType)
-                {
-                    case SearchType.StartsWith:
-                        return propertyValue != null && propertyValue.ToString().StartsWith(Filter);
-                    case SearchType.EndWith:
-                        return propertyValue != null && propertyValue.ToString().EndsWith(Filter);
-                    case SearchType.Contains:
-                        return propertyValue != null && propertyValue.ToString().Contains(Filter);
-                    default:
-                        return propertyValue != null && propertyValue.ToString().StartsWith(Filter);
-                }
-                    }
-                    return false;
-
-                }).ToList();*/
             }
 
             return query;

@@ -17,6 +17,7 @@ namespace WebAppDemoRazorPages.Pages.Organizations
         public DetailsModel(WebAppDemoRazorPages.Data.ApplicationDbContext context)
         {
             _context = context;
+
         }
 
         public Organization Organization { get; set; } = default!;
@@ -42,8 +43,11 @@ namespace WebAppDemoRazorPages.Pages.Organizations
             }
             else 
             {
+
                 Organization = organization;
+                TempData["myData"] = Organization.Id;
             }
+
             return Page();
         }
     }
